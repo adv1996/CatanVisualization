@@ -62,15 +62,12 @@
           .attr("height", this.height)
           .attr("width", this.width);
 
-        const g = svg.append("g")
-          .attr("transform", "translate(" + this.left + "," + this.top + ")");
-
-        g.append("g")
+        svg.append("g")
           .style("font", "0.75em arial")
           .attr("transform", "translate(" + (xScale(1) - xScale(0)) / 2 + "," + (height) + ")")
           .call(d3.axisBottom(xScale))
         
-        let bar = g.selectAll(".bar")
+        let bar = svg.selectAll(".bar")
           .data(data)
           .enter().append("g")
           .attr("class", "bar")
