@@ -1,23 +1,20 @@
 <template>
-  <v-flex>
-    <v-btn color="success" v-on:click="createBoard">Shuffle</v-btn>
-    <v-btn color="success" v-on:click="createBoard">Customize</v-btn>
-    <v-btn color="success" v-on:click="createBoard">Animate</v-btn>
+  <v-card>
     <svg class='base_hexagon'/>
-  </v-flex>
+  </v-card>
 </template>
 
 <script>
   import * as d3 from 'd3';
-  import Board from './Board/Board.js'
 
   export default {
+    props: ['tiles'],
     data() {
       return {
         svg: '',
-        xDiff: 70,
-        yDiff: 50,
-        side_length: 35,
+        xDiff: 125,
+        yDiff: 75,
+        side_length: 55,
       }
     },
     mounted() {
@@ -27,11 +24,9 @@
       createBoard() {
         let svg = d3.select('.base_hexagon')
           svg.selectAll("*").remove();
-        this.drawBoard(350, 350);
-        let game = new Board();
-        let tiles = game.createTiles();
-        for (let index in tiles) {
-          this.drawHexagon(tiles[index])
+        this.drawBoard(600, 600);
+        for (let index in this.tiles) {
+          this.drawHexagon(this.tiles[index])
         }
       },
       drawBoard(height, width) {
@@ -58,13 +53,15 @@
           .x(function(d) { return d.x; })
           .y(function(d) { return d.y; })
         
-        const g = this.svg.append('g');
+        const g = 
+          this.svg.append('g')
 
         g.selectAll("path.area") //draw elements
           .data([hex_point_data]) // 10. Binds data to the line 
           .enter().append('path')
           .style("fill", tile.color) // Assign a class for styling 
           .attr("d", line) // 11. Calls the line generator  
+          .attr('class', 'DN' + tile.distribution_number + ' tiles');
 
         g.append('circle')
           .attr('cx', starting_x + Math.cos(30 * Math.PI / 180) * this.side_length)
