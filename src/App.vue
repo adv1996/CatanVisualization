@@ -7,9 +7,11 @@
             <v-layout row wrap>
               <v-flex d-flex>
                 <ResourceChart v-if="values" :resources="resources" :values="values" :rd="rd"/>
+                <DiceRoll v-if="values" :resources="resources" :values="values" :rd="rd"/>
+                <NFL/>
               </v-flex>
               <v-flex d-flex>
-                <Histogram v-if="values" :values="values"/>
+                <Histogram v-if="values" :values="values" :resources="resources" :rd="rd"/>
               </v-flex>
             </v-layout>
           </v-flex>
@@ -28,7 +30,9 @@
 import Map from './components/Board'
 import Histogram from './components/Histogram'
 import ResourceChart from './components/ResourceChart'
+import DiceRoll from './components/DiceRoll'
 import Board from './components/Board/Board.js'
+import NFL from './components/NFL.vue'
 import * as d3 from 'd3';
 import {chain} from 'lodash';
 
@@ -38,6 +42,8 @@ export default {
     Map,
     Histogram,
     ResourceChart,
+    DiceRoll,
+    NFL,
   },
   data () {
     return {

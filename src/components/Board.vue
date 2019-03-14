@@ -55,11 +55,13 @@
         
         const g = 
           this.svg.append('g')
-
+        
         g.selectAll("path.area") //draw elements
           .data([hex_point_data]) // 10. Binds data to the line 
           .enter().append('path')
-          .style("fill", tile.color) // Assign a class for styling 
+          .style("stroke", 'gold') // Assign a class for styling
+          .style("stroke-width", 4) 
+          .style("fill", tile.color)
           .attr("d", line) // 11. Calls the line generator  
           .attr('class', 'DN' + tile.distribution_number + ' tiles');
 

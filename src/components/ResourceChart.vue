@@ -1,7 +1,6 @@
 <template>
   <v-card>
     <svg class='resources'/>
-    <v-btn color="blue" v-on:click="sortChart">Run it</v-btn>
   </v-card>
 </template>
 
@@ -117,7 +116,7 @@
               .transition()
               .selectAll('.bar')
               .duration(750)
-              .attr('width', (d) => {return xs(d.quantity)})
+              .attr('width', (d, i) => {return xs(this.resources[i].quantity)})
               .on("end", function() {repeat(dn, rd, rs)})
             
             svg
